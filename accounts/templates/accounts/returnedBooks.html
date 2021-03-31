@@ -1,0 +1,35 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+
+<hr>
+<div class="col">
+    <h5>See all RETURNED BOOKS here</h5>
+    <hr>
+    <div class="card card-body">
+        <a class="btn btn-primary btn-sm btn-block" href="{% url 'create_order' %}">Issue a book</a>
+        <table class="table table-sm">
+            <tr>
+                <th>Book Name</th>
+                <th>Student Username</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>Remove</th>
+            </tr>
+            {% for order in returned %}
+            <tr>
+                <td>{{order.book}}</td>
+                <td>{{order.customer}}</td>
+                <td>{{order.status}}</td>
+                <td><a href="{% url 'update_order' order.id %}" class="btn btn-sm btn-info">Update</a></td>
+                <td><a href="{% url 'delete_order' order.pk %}" class="btn btn-sm btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+            
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
