@@ -15,7 +15,22 @@
                     <th>Name</th>
                     <th>Phone</th>
                 </tr>
+                <div class="card card-body">
+                    <form class="form-inline my-2 my-lg-0" method="GET">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search a student name" aria-label="Search" name="search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
 
+                {% if search %}
+                {% for customer in result %}
+                <tr>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
+                    <td>{{customer.name}}</td>
+                    <td>{{customer.phone}}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
                 {% for customer in customers %}
                 <tr>
                     <td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
@@ -23,7 +38,7 @@
                     <td>{{customer.phone}}</td>
                 </tr>
                 {% endfor %}
-
+                {% endif %}
             </table>
         </div>
     </div>

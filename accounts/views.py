@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
 from datetime import datetime
+from django.db.models import Q
 # yesterday = datetime.date.today() - datetime.timedelta(days=1)
 
 @unauthenticated_user
@@ -60,16 +61,21 @@ def home(request):
     late_submissions = orders.filter(status='Late Submission', date_created__gte=datetime.today().date()).count()
     returned = orders.filter(status='Returned', date_created__gte=datetime.today().date()).count()
     issued = orders.filter(status='Issued', date_created__gte=datetime.today().date()).count()
+    if request.method == 'GET':
+        search = request.GET.get('search', '')
+        result = Customer.objects.filter(name__icontains=search)
 
-    context = {'orders': orders, 'customers': customers, 'total_customers': total_customers, 'returned': returned, 'issued': issued, 'late_submissions': late_submissions, 'allIssuedBooksToday': allIssuedBooksToday}
+    context = {'orders': orders, 'customers': customers, 'total_customers': total_customers, 'returned': returned, 'issued': issued, 'late_submissions': late_submissions, 'allIssuedBooksToday': allIssuedBooksToday, 'search': search, 'result': result}
 
     return render(request, 'accounts/dashboard.html', context)
 
 @login_required(login_url='login')
 def products(request):
     products = Product.objects.all()
-
-    return render(request, 'accounts/products.html', {'products': products})
+    if request.method == 'GET':
+        search = request.GET.get('search', '')
+        result = Product.objects.filter(name__icontains=search)
+    return render(request, 'accounts/products.html', {'products': products, 'search': search, 'result': result})
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admins'])
@@ -154,6 +160,21 @@ def lateSubmissions(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admins'])
 def returnedBooks(request):
-    returnedBooks = Order.objects.filter(status='Returned')
+    returnedBooks = Order.objects.filter(Q(status="Returned") | Q(status="Late Submission"))
     context = {'returned': returnedBooks}
     return render(request, 'accounts/returnedBooks.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['students'])
+def accountSettings(request):
+	customer = request.user.customer
+	form = CustomerForm(instance=customer)
+
+	if request.method == 'POST':
+		form = CustomerForm(request.POST, request.FILES,instance=customer)
+		if form.is_valid():
+			form.save()
+
+
+	context = {'form':form}
+	return render(request, 'accounts/account_settings.html', context)

@@ -9,12 +9,27 @@
             <h5>Book List</h5>
         </div>
         <div class="card card-body">
+            <form class="form-inline my-2 my-lg-0" method="GET">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search a book name" aria-label="Search" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="card card-body">
             <table class="table">
                 <tr>
                     <th>Book name</th>
                     <th>Author</th>
                     <th>ISBN</th>
                 </tr>
+                {% if search %}
+                {% for book in result %}
+                <tr>
+                    <td>{{book.name}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.isbn}}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
 
                 {% for product in products %}
                 <tr>
@@ -23,6 +38,7 @@
                     <td>{{product.isbn}}</td>
                 </tr>
                 {% endfor %}
+                {% endif %}
             </table>
         </div>
     </div>
