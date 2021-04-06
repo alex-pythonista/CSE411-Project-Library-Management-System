@@ -4,8 +4,7 @@ Python 3.8
 Django version: 3.1
 
 Install:
-django-filters
-pillow
+django-filters, pillow
 
 Virtual Environment:
 pipenv
