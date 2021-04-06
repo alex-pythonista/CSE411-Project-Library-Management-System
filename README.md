@@ -9,7 +9,7 @@ django-filters, pillow
 Virtual Environment:
 pipenv
 
-Inspired by: Dennis Ivy's CRM project
+Inspired by: Dennis Ivy's CRM project \n
 Project tutorial link: https://www.youtube.com/playlist?list=PL-51WBLyFTg2vW-_6XBoUpE7vpmoR3ztO
 
 A team project of
