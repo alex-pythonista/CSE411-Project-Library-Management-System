@@ -1,0 +1,75 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+{% include 'accounts/status.html' %}
+<br>
+<div class="row">
+    <div class="col-md-5">
+        <h5>STUDENTS:</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                </tr>
+                <div class="card card-body">
+                    <form class="form-inline my-2 my-lg-0" method="GET">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search a student name" aria-label="Search" name="search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+
+                {% if search %}
+                {% for customer in result %}
+                <tr>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
+                    <td>{{customer.name}}</td>
+                    <td>{{customer.phone}}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                {% for customer in customers %}
+                <tr>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
+                    <td>{{customer.name}}</td>
+                    <td>{{customer.phone}}</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <h5>Today's STAT</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-primary btn-sm btn-block" href="{% url 'create_order' %}">Issue a book</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Book Name</th>
+                    <th>Student Username</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+                {% for order in allIssuedBooksToday %}
+                <tr>
+                    <td>{{order.book}}</td>
+                    <td>{{order.customer}}</td>
+                    <td>{{order.status}}</td>
+                    <td><a href="{% url 'update_order' order.id %}" class="btn btn-sm btn-info">Update</a></td>
+                    <td><a href="{% url 'delete_order' order.pk %}" class="btn btn-sm btn-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+                
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

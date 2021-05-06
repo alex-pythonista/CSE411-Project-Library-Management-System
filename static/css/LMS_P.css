@@ -1,0 +1,52 @@
+h1{
+    text-align: center;
+    font-size: 40px;
+    
+}
+.image{
+    width: 100%;
+}
+.Upper_effect{
+  position: absolute;
+  top: 100px;
+  left: 0.5%;
+  right: 3%;
+  height: 120.1%;
+  width: 99%;
+  opacity: 0;
+  transition: 1s linear;
+  background-color: #23677e;
+}
+
+.container1:hover .Upper_effect{
+    opacity: 1;
+}
+
+.hover{
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-70%, -60%); 
+         
+}
+.container{
+    background-color: rgb(103, 119, 75);
+    height: 400px;
+    width: 500px;
+    margin-left:450px ;
+}
+.container h1{
+    text-align: center;
+}
+.table{
+
+    width: 100%;
+}
+.table th:hover{
+    background-color:#c0a3a3;
+}
+th{
+    font-size: 30px;
+}

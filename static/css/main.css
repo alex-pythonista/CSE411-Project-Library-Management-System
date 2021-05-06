@@ -1,0 +1,58 @@
+#logo {
+
+}
+body {
+    background-color: #ebeff5;
+}
+
+#total-orders {
+    background-color: #4cb4c7;
+}
+#orders-delivered {
+    background-color: #7abecc;
+}
+#orders-pending {
+    background-color: #7CD1C0;
+}
+
+/* developer: Megha */
+/*font*/
+@font-face{
+    font-family: "oswald medium";
+    src: url(../fonts/Oswald-Medium.ttf);
+}
+@font-face{
+    font-family: "oswald extralight";
+    src: url(../fonts/Oswald-ExtraLight.ttf);
+}
+/*color*/
+:root{
+    --maroon: 8F301C;
+    --grey: 52504F;
+    --black:000000;
+    --white:FFFFFF;
+    --yellow:FFE021;
+    --blue:1F86CF;
+
+
+}
+.phone{
+  padding: 1rem 02rem;
+  display: flex;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+.email{
+    padding: 1rem 02rem;
+    display: flex;
+    margin-right: 10px;
+    margin-top: 3px;
+  }
+.Website{
+    padding: 1rem 02rem;
+    display: flex;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+.header{
+    background :linear-gradient(57deg,#FFFFFF, #ECD5BB)}
